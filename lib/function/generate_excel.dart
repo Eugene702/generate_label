@@ -4,89 +4,62 @@ import 'dart:html';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 Future<void> generateExcel(
-  List<int> byets,
-  String partNo,
-  String qtyPack,
-  String qtyDlv,
-  String dlvDate,
-  String lotNo,
-  String location,
-  String supplier,
-  String pic,
-  int numberLabels,
+  {
+    required List<int> bytes,
+    required String partNo,
+    required String qtyPack,
+    required String qtyDlv,
+    required String dlvDate,
+    required String lotNo,
+    required String location,
+    required String supplier,
+    required String pic,
+    required int numberLabels,
+  }
 ) async{
     final Workbook workbook = Workbook();
     final Worksheet sheet = workbook.worksheets[0];
-    final List<int> file = byets;
-    int col = 1;
+    // final List<int> file = bytes;
+    // int col = 1;
+    Style globalStyle = workbook.styles.add("style");
+    globalStyle.fontSize = 9;
 
-    sheet.getRangeByName('A1').columnWidth = 10.86;
-    sheet.getRangeByName('B1').columnWidth = 1.00;
-    sheet.getRangeByName('C1').columnWidth = 16.86;
-    sheet.getRangeByName('D1').columnWidth = 16.86;
+    // Column 1
+    sheet.getRangeByName('A1').columnWidth = 7.71;
+    sheet.getRangeByName('B1').columnWidth = .83;
+    sheet.getRangeByName('C1').columnWidth = 10.14;
+    sheet.getRangeByName('D1').columnWidth = 6.43;
+    sheet.getRangeByName('E1').columnWidth = .43;
+    sheet.getRangeByName('F1').columnWidth = 4.0;
 
-    sheet.getRangeByName('F1').columnWidth = 10.86;
-    sheet.getRangeByName('G1').columnWidth = 1.00;
-    sheet.getRangeByName('H1').columnWidth = 16.86;
-    sheet.getRangeByName('I1').columnWidth = 16.86;
+    sheet.getRangeByName('A1:F2').merge();
+    sheet.getRangeByName('D4:F8').merge();
 
-    for(int i = 0; i < numberLabels; i++){
-      if( i % 2 == 0){
-        sheet.getRangeByName('A$col:C${col + 2}').cellStyle.bold = true;
-        sheet.getRangeByName('D$col:D${col + 5}').merge();
-        sheet.getRangeByName('C${col + 6}:D${col + 6}').merge();
+    sheet.getRangeByName('A3').text = 'QTY PACK';
+    sheet.getRangeByName('A4').text = 'PART NO';
+    sheet.getRangeByName('A5').text = 'DLV DATE';
+    sheet.getRangeByName('A6').text = 'LOT NO';
+    sheet.getRangeByName('A7').text = 'LOCATION';
+    sheet.getRangeByName('A8').text = 'PIC';
+    sheet.getRangeByName('D3').text = 'QTY DLV';
 
-        sheet.getRangeByName('B$col:B${col + 6}').setText(":");
-        sheet.getRangeByName('A$col').setText("PART NO");
-        sheet.getRangeByName('A${col + 1}').setText("QTY PACK");
-        sheet.getRangeByName('A${col + 2}').setText("QTY DLV");
-        sheet.getRangeByName('A${col + 3}').setText("DLV DATE");
-        sheet.getRangeByName('A${col + 4}').setText("LOT NO");
-        sheet.getRangeByName('A${col + 5}').setText("LOCATION");
-        sheet.getRangeByName('A${col + 6}').setText("SUPPLIER");
-        sheet.getRangeByName('A${col + 7}').setText("PIC");
+    sheet.getRangeByName('B3:B8').text = ':';
+    sheet.getRangeByName('E3').text = ':';
 
-        sheet.getRangeByName('C$col').setText(partNo);
-        sheet.getRangeByName('C${col + 1}').setText(qtyPack);
-        sheet.getRangeByName('C${col + 2}').setText(qtyDlv);
-        sheet.getRangeByName('C${col + 3}').setText(dlvDate);
-        sheet.getRangeByName('C${col + 4}').setText(lotNo);
-        sheet.getRangeByName('C${col + 5}').setText(location);
-        sheet.getRangeByName('C${col + 6}').setText(supplier);
-        sheet.getRangeByName('C${col + 7}').setText(pic);
+    sheet.getRangeByName('C3').text = qtyPack;
+    sheet.getRangeByName('C4').text = partNo;
+    sheet.getRangeByName('C5').text = dlvDate;
+    sheet.getRangeByName('C6').text = lotNo;
+    sheet.getRangeByName('C7').text = location;
+    sheet.getRangeByName('C8').text = pic;
+    sheet.getRangeByName('F4').text = qtyDlv;
 
-        sheet.pictures.addStream(1 + col, 4, file);
-      }else{
-        sheet.getRangeByName('F$col:H${col + 2}').cellStyle.bold = true;
-        sheet.getRangeByName('I$col:I${col + 5}').merge();
-        sheet.getRangeByName('H${col + 6}:I${col + 6}').merge();
+    // Use Global Style
+    sheet.getRangeByName("A1:F1").cellStyle = globalStyle;
+    sheet.getRangeByName("A3:F4").cellStyle.bold = true;
 
-        sheet.getRangeByName('G$col:G${col + 6}').setText(":");
-        sheet.getRangeByName('F$col').setText("PART NO");
-        sheet.getRangeByName('F${col + 1}').setText("QTY PACK");
-        sheet.getRangeByName('F${col + 2}').setText("QTY DLV");
-        sheet.getRangeByName('F${col + 3}').setText("DLV DATE");
-        sheet.getRangeByName('F${col + 4}').setText("LOT NO");
-        sheet.getRangeByName('F${col + 5}').setText("LOCATION");
-        sheet.getRangeByName('F${col + 6}').setText("SUPPLIER");
-        sheet.getRangeByName('F${col + 7}').setText("PIC");
-
-        sheet.getRangeByName('H$col').setText(partNo);
-        sheet.getRangeByName('H${col + 1}').setText(qtyPack);
-        sheet.getRangeByName('H${col + 2}').setText(qtyDlv);
-        sheet.getRangeByName('H${col + 3}').setText(dlvDate);
-        sheet.getRangeByName('H${col + 4}').setText(lotNo);
-        sheet.getRangeByName('H${col + 5}').setText(location);
-        sheet.getRangeByName('H${col + 6}').setText(supplier);
-        sheet.getRangeByName('H${col + 7}').setText(pic);
-
-        sheet.pictures.addStream(1 + col, 9, file);
-        col += 9;
-      }
-    }
-
-    final List<int> bytes = workbook.saveAsStream();
-    // File("C:/Users/eugen/Documents/Generate Labels/$partNo Labels.xlsx").writeAsBytes(bytes);
-    AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")..setAttribute("download", "$partNo Labels.xlsx")..click();
+    final List<int> files = workbook.saveAsStream();
+    // File("C:/Users/eugen/Documents/Generate Labels/$partNo Labels.xlsx").writeAsfiles(files);
+    AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(files)}")..setAttribute("download", "$partNo Labels.xlsx")..click();
     workbook.dispose();
   }

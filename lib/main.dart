@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generate_label/login.dart';
+import 'package:generate_label/home.dart';
+// import 'package:generate_label/login.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
           primary: Colors.red.shade400
         )
       ),
-      home: const Login()
+      home: const Home()
     );
   }
 }
