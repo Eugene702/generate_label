@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
               children: [
                 Flexible(flex: 1, child: textFormField(controller: partNo, label: "Part No")),
                 const SizedBox(width: 10.0),
-                Flexible(flex: 1, child: textFormField(controller: qtyPack, label: "Part No")),
+                Flexible(flex: 1, child: textFormField(controller: qtyPack, label: "Qty Pack")),
               ],
             ),
             const SizedBox(height: 20.0),

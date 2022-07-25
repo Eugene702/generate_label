@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import '../../function/generate_excel.dart';
@@ -50,7 +52,7 @@ ElevatedButton generateExcelButton({
         );
       } else {
         final controller = ScreenshotController();
-        final qrText = '$partNo,$qtyPack,$qtyDlv,$dlvDate,$lotNo,$supplier,$pic';
+        final qrText = '${partNo.text},${qtyPack.text},${qtyDlv.text},${dlvDate.text},${lotNo.text},${supplier.text},${pic.text}';
         final bytes = await controller.captureFromWidget(qrImage(qrText));
         generateExcel(
           bytes: bytes,
