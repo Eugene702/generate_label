@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'package:flutter/services.dart';
@@ -10,7 +9,7 @@ Future<List<int>> _readImageData(String name) async{
   return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 }
 
-Future<void> generateExcel(
+Future<void> generateExcel2(
   {
     required List<int> bytes,
     required String partNo,
