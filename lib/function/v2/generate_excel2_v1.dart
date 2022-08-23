@@ -184,14 +184,15 @@ Future<void> generateExcel2V1(
     }
   }
 
-  workbook = Workbook();
-  sheet = workbook.worksheets[0];
-
-  col = 1;
-  row = 1;
+  
   final List<int> files = workbook.saveAsStream();
   final Directory path = await getApplicationDocumentsDirectory();
   await Directory("${path.path}/Generate Label").create(recursive: true);
   await File("${path.path}/Generate Label/$partNo.xlsx").writeAsBytes(files);
   workbook.dispose();
+  workbook = Workbook();
+  sheet = workbook.worksheets[0];
+
+  col = 1;
+  row = 1;
 }
