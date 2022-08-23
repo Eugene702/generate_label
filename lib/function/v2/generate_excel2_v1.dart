@@ -5,8 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 // Variable XLSX
-final Workbook workbook = Workbook();
-final Worksheet sheet = workbook.worksheets[0];
+Workbook workbook = Workbook();
+Worksheet sheet = workbook.worksheets[0];
 
 // Increment
 int col = 1;
@@ -94,6 +94,11 @@ Future<void> generateExcel2V1(
     required int numberLabels,
   }
 ) async{
+  workbook = Workbook();
+  sheet = workbook.worksheets[0];
+
+  col = 1;
+  row = 1;
   final String logo = base64.encode(await _readImageData('label_logo.png'));
 
   // Cell Style
@@ -178,8 +183,12 @@ Future<void> generateExcel2V1(
         break;
     }
   }
-  
 
+  workbook = Workbook();
+  sheet = workbook.worksheets[0];
+
+  col = 1;
+  row = 1;
   final List<int> files = workbook.saveAsStream();
   final Directory path = await getApplicationDocumentsDirectory();
   await Directory("${path.path}/Generate Label").create(recursive: true);

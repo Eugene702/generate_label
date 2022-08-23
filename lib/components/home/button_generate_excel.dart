@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:generate_label/components/home/modal_select_printer_for_label_v2.dart';
 import 'package:screenshot/screenshot.dart';
-<<<<<<< HEAD
 import '../../function/generate_excel1.dart';
 import '../dialog_messages.dart';
 import '../dialog_waiting.dart';
-=======
-import '../../function/generate_excel2.dart';
->>>>>>> 66433d3fc3b9bd8064642f14d01a1cdd789500de
 import 'qr_image.dart';
 
 InkWell buttonGenerateExcel({
@@ -24,7 +20,6 @@ InkWell buttonGenerateExcel({
   required TextEditingController pic,
   required TextEditingController numberLabels,
 }) {
-<<<<<<< HEAD
     return InkWell(
       onTap: () async {
         dialogWating(context);
@@ -86,59 +81,3 @@ InkWell buttonGenerateExcel({
       borderRadius: BorderRadius.circular(10.0),
     );
   }
-
-=======
-  return ElevatedButton(
-    child: Row(
-      children: const [
-        Icon(Icons.save_rounded),
-        SizedBox(width: 10),
-        Text("Generate Labels And Save In Excel Format"),
-      ],
-    ),
-    onPressed: () async {
-      if (
-        partNo.text.isEmpty ||
-        qtyPack.text.isEmpty ||
-        qtyDlv.text.isEmpty ||
-        dlvDate.text.isEmpty ||
-        pic.text.isEmpty ||
-        lotNo.text.isEmpty ||
-        supplier.text.isEmpty ||
-        numberLabels.text.isEmpty ||
-        location.text.isEmpty
-      ) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text("Error"),
-            content: const Text("Please fill all the fields"),
-            actions: [
-              ElevatedButton(
-                child: const Text("OK"),
-                onPressed: () => Navigator.pop(context)
-              )
-            ]
-          )
-        );
-      } else {
-        final controller = ScreenshotController();
-        final qrText = '${partNo.text},${qtyPack.text},${qtyDlv.text},${dlvDate.text},${lotNo.text},${supplier.text},${pic.text}';
-        final bytes = await controller.captureFromWidget(qrImage(qrText));
-        generateExcel2(
-          bytes: bytes,
-          partNo: partNo.text,
-          qtyPack: qtyPack.text,
-          qtyDlv: qtyDlv.text,
-          dlvDate: dlvDate.text,
-          pic: pic.text,
-          lotNo: lotNo.text,
-          supplier: supplier.text,
-          location: location.text,
-          numberLabels: int.parse(numberLabels.text),
-        );
-      }
-    },
-  );
-}
->>>>>>> 66433d3fc3b9bd8064642f14d01a1cdd789500de
